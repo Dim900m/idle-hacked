@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simple Idle Game</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #222; color: #eee; text-align: center; padding: 20px; }
+  button { padding: 10px 20px; margin: 10px; font-size: 18px; cursor: pointer; }
+  #points { font-size: 32px; margin: 20px; }
+  #upgrade { margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Idle Clicker</h1>
+<div id="points">Points: 0</div>
+<button id="clicker">Click me!</button>
+
+<div id="upgrade">
+  <h3>Upgrades</h3>
+  <button id="upgrade1">Buy Upgrade (+100 pts/sec) - Cost: 1</button>
+</div>
+
+<script>
+  let points = 0;
+  let pointsPerClick = 100;
+  let pointsPerSecond = 0;
+  let upgradeCost = 1;
+  let upgradeLevel = 0;
+
+  const pointsDisplay = document.getElementById('points');
+  const clicker = document.getElementById('clicker');
+  const upgradeBtn = document.getElementById('upgrade1');
+
+  clicker.onclick = () => {
+    points += pointsPerClick;
+    updatePoints();
+  };
+
+  upgradeBtn.onclick = () => {
+    if (points >= upgradeCost) {
+      points -= upgradeCost;
+      upgradeLevel++;
+      pointsPerSecond += 1;
+      upgradeCost = Math.floor(upgradeCost * 1.5);
+      upgradeBtn.textContent = `Buy Upgrade (+100 pts/sec) - Cost: ${upgradeCost}`;
+      updatePoints();
+    }
+  };
+
+  function updatePoints() {
+    pointsDisplay.textContent = `Points: ${points.toFixed(0)}`;
+  }
+
+  // Add points per second every second
+  setInterval(() => {
+    points += pointsPerSecond;
+    updatePoints();
+  }, 1000);
+
+  updatePoints();
+</script>
+
+</body>
+</html>
