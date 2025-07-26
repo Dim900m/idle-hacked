@@ -24,7 +24,7 @@
 
 <script>
   let points = 0;
-  let pointsPerClick = 100;
+  let pointsPerClick = 1;
   let pointsPerSecond = 0;
   let upgradeCost = 1;
   let upgradeLevel = 0;
@@ -42,8 +42,8 @@
     if (points >= upgradeCost) {
       points -= upgradeCost;
       upgradeLevel++;
-      pointsPerSecond += 1;
-      upgradeCost = Math.floor(upgradeCost * 1.5);
+      pointsPerSecond += 100;
+      upgradeCost = Math.floor(upgradeCost * 100);
       upgradeBtn.textContent = `Buy Upgrade (+100 pts/sec) - Cost: ${upgradeCost}`;
       updatePoints();
     }
